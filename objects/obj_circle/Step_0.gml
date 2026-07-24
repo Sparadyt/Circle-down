@@ -1,0 +1,2 @@
+state = GetState();
+ChangeSprite();

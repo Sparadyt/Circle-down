@@ -1,2 +1,8 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Re-classify .yy files (for GMS 2 projects)
+*.yy linguist-language=GML
+ 
+# force LF for metadata files for merge simplicity
+*.gml text eol=lf
+*.yy text eol=lf
+*.yyp text eol=lf
+*.json text eol=lf

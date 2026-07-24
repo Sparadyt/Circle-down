@@ -1,0 +1,1 @@
+global.best_time = 0;
