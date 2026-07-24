@@ -3,6 +3,8 @@ global.circle_amount += 1;
 global.pressed_circles = 0;
 circle_id = global.circle_amount;
 pressed = false;
+drag_circle = false;
+dragged = false;
 
 //show_debug_message($"Circle Amount: {global.circle_amount}");
 //show_debug_message($"Total circle objects: {instance_number(obj_circle)}");
@@ -17,6 +19,16 @@ enum circle_state
 state = GetState();
 ChangeSprite();
 
+function DragCircleChecking()
+{
+	drag_path = instance_position(x, y, obj_dragPath);
+	if(drag_path == noone) return;
+	
+	drag_end = instance_position(drag_path.x, drag_path.y, obj_dragPath);
+	if(drag_end == noone) return;
+	
+	drag_circle = true;
+}
 function GetState()
 {
 	var _circle_amount = instance_number(obj_circle) - global.pressed_circles;
@@ -45,29 +57,48 @@ function ChangeSprite()
 
 function Tapped()
 {
-	if(state != circle_state.toPress)
+	//if(state != circle_state.toPress)
 	{
-		global.circle_amount = 0;
-		global.pressed_circles = 0;
-		obj_game_manager.lost = true;
-		room_restart();
-		return;
+		Lost();
 	}
 	
-	show_debug_message("Tapped")
+	//if(!drag_circle)
+	{
+		show_debug_message("Tapped")
 
-	state = circle_state.pressed;
-	pressed = true;
-	global.pressed_circles++;
-	global.circle_amount--;
+		state = circle_state.pressed;
+		pressed = true;
+		global.pressed_circles++;
+		global.circle_amount--;
+	}
 	
 	//Playing sound
-	var _pitch = random_range(0.75, 1.25);
-	audio_play_sound(snd_click, 100, false, 1, 0, _pitch);
+	//if(!drag_circle)
+	{
+		var _pitch = random_range(0.75, 1.25);
+		audio_play_sound(snd_click, 100, false, 1, 0, _pitch);
+	}
 	
+	Win();
+}
+
+function Lost()
+{
+	global.circle_amount = 0;
+	global.pressed_circles = 0;
+	obj_game_manager.lost = true;
+	room_restart();
+	return;
+}
+
+function Win()
+{
 	if(global.pressed_circles == instance_number(obj_circle) && room != room_last)
 	{
 		obj_timer.paused = true;
+		
 		room_goto(rm_level_completed);
+		var _pitch = random_range(0.75, 1.25);
+		audio_play_sound(snd_level_complete, 100, false, 1, 0, _pitch);
 	}
 }
