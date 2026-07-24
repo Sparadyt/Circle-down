@@ -16,18 +16,17 @@ var _y_scale = 0.125;
 
 if(room == rm_level_completed)
 {
-	draw_text_transformed(obj_timer.x, obj_timer.y, obj_game_manager.time, 0.9, 0.9, 360);
+	draw_text_transformed(obj_timer.x, obj_timer.y, obj_game_manager.time, 0.7, 0.7, 360);
 }
 
 else
 	draw_text_transformed(obj_timer.x, obj_timer.y, $"{minute}:{second}.{millisecond}", _x_scale, _y_scale, 360);
 
 //Best time
-return;
 if(room == rm_level_completed)
 {
-	millisecond = array_last(obj_best_time.levelms);
-	second = array_last(obj_best_time.level1_second);
-	minute = array_last(obj_best_time.level1_minute);
-	draw_text_transformed(obj_best_time.x, obj_best_time.y, $"PB: {minute}:{second}.{millisecond}", 0.9, 0.9, 360);
+	millisecond = obj_game_manager.GetListLastElement(global.levelms);
+	second = obj_game_manager.GetListLastElement(global.levelsec);
+	minute = obj_game_manager.GetListLastElement(global.levelmin);
+	draw_text_transformed(obj_best_time.x, obj_best_time.y, $"PB: {minute}:{second}.{millisecond}", 0.7, 0.7, 360);
 }
