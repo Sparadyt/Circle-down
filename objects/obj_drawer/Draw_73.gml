@@ -25,8 +25,8 @@ else
 //Best time
 if(room == rm_level_completed)
 {
-	millisecond = obj_game_manager.GetListLastElement(obj_best_time.levelms);
-	second = obj_game_manager.GetListLastElement(obj_best_time.levelsec);
-	minute = obj_game_manager.GetListLastElement(obj_best_time.levelmin);
+	millisecond = obj_game_manager.GetListLastElement(global.levelms);
+	second = obj_game_manager.GetListLastElement(global.levelsec);
+	minute = obj_game_manager.GetListLastElement(global.levelmin);
 	draw_text_transformed(obj_best_time.x, obj_best_time.y, $"PB: {minute}:{second}.{millisecond}", 0.7, 0.7, 360);
 }

@@ -1,10 +1,18 @@
 frames = 0;
+frames_after_level_completion = 0;
 time = "00:00.00";
 previous_room = room_first;
+lost = false;
+start_delay = 0;
 
 function WaitForInput()
 {
 	if(room == rm_level_completed) return;
+	if(start_delay > 0)
+	{
+		start_delay--;
+		return;
+	}
 	
 	if(mouse_check_button_pressed(mb_left))
 	{

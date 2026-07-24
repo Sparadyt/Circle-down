@@ -4,8 +4,8 @@ global.pressed_circles = 0;
 circle_id = global.circle_amount;
 pressed = false;
 
-show_debug_message($"Circle Amount: {global.circle_amount}");
-show_debug_message($"Total circle objects: {instance_number(obj_circle)}");
+//show_debug_message($"Circle Amount: {global.circle_amount}");
+//show_debug_message($"Total circle objects: {instance_number(obj_circle)}");
 
 enum circle_state
 {
@@ -49,6 +49,7 @@ function Tapped()
 	{
 		global.circle_amount = 0;
 		global.pressed_circles = 0;
+		obj_game_manager.lost = true;
 		room_restart();
 		return;
 	}
